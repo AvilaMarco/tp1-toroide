@@ -1,31 +1,53 @@
 #include <algorithm>
+#include <utility>
 #include "ejercicios.h"
+#include "auxiliares.h"
+#include <iostream>
+#include <vector>
 
 // EJERCICIO 1
 bool toroideValido(vector<vector<bool>> const &t) {
     bool resp = false;
-    // Implementacion
+    resp = esToroide(t);
     return resp;
 }
 
 // EJERCICIO 2
 bool toroideMuerto(toroide const &t) {
-    bool resp = false;
-    // Implementacion
+    bool resp = true;
+    int f,c =0;
+    for(f=0; f<t.size(); f++){
+        for(c=0; c<t[0].size(); c++){
+            if(enRangoToroide(f,c,t) && !(t[f][c] == false)){
+                resp = false;
+            }
+        }
+    }
+
     return resp;
 }
 
 // EJERCICIO 3
 vector<posicion> posicionesVivas(toroide const &t) {
 	vector<posicion> vivos;
-    // Implementacion
+    pair<int, int> vAux;
+    for(int i=0; i<t.size(); i++){
+        for(int j=0; j<t[i].size(); j++){
+            if(t[i][j]) {
+                vAux.first = i;
+                vAux.second = j;
+                vivos.push_back(vAux);
+            }
+        }
+    }
     return vivos;
 }
 
 // EJERCICIO 4
 float densidadPoblacion(toroide const &t) {
+    //pre: esToroide(t)
 	float resp = -1;
-    // Implementacion
+    resp = (cantidadVivas(t)/superficieTotal(t)); //superficieTotal != 0
     return resp;
 }
 
@@ -45,7 +67,13 @@ bool evolucionDePosicion(toroide const &t, posicion x) {
 
 // EJERCICIO 7
 void evolucionToroide(toroide &t){
-    // Implementacions
+    toroide tAux = t;
+    for(int i=0; i<t.size(); i++) {
+        for (int j = 0; j < t[i].size(); j++) {
+            tAux[i][j] = debeVivir(t,i,j);
+        }
+    }
+    t=tAux;
     return;
 }
 
@@ -58,9 +86,19 @@ toroide evolucionMultiple(toroide const &t, int K) {
 
 // EJERCICIO 9
 bool esPeriodico(toroide const &t, int &p) {
-    bool resp = false;
-    // Implementacion
-    return resp;
+    //pre: t muere o es Evolución ciclica
+    toroide tAux = t;
+
+    p=0;
+
+    while(!toroideMuerto(tAux)){
+        evolucionToroide(tAux);
+        p++;
+
+        if(tAux == t) return true;
+    }
+
+    return false;
 }
 
 // EJERCICIO 10
