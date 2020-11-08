@@ -16,3 +16,27 @@ TEST(toroideMuertoTEST, toroideDiagonalVivas){
 
     EXPECT_FALSE(toroideMuerto(t));
 }
+
+TEST(toroideMuertoTEST, toroidePrimeraViva){
+    toroide t = {
+            {true, false, false},
+            {false, false, false},
+            {false, false, false},
+            {false, false, false},
+            {false, false, false},
+            {false, false, false}};
+
+    EXPECT_FALSE(toroideMuerto(t));
+}
+
+TEST(toroideMuertoTEST, toroideTodosMuertos){
+    toroide t = {
+            {false, false, false},
+            {false, false, false},
+            {false, false, false},
+            {false, false, false},
+            {false, false, false},
+            {false, false, false}};
+
+    EXPECT_TRUE(toroideMuerto(t));
+}

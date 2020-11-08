@@ -16,3 +16,15 @@ TEST(esPeriodicoTEST, toroideHorizontalPeriodico2){
     EXPECT_TRUE(res);
     EXPECT_EQ(p, 2);
 }
+
+TEST(esPeriodicoTEST, toroideHorizontalMuere){
+    vector<bool> a = { false, false, false, false };
+    vector<bool> b = { true, false, false, false };
+    toroide t = { a, b, b, a };
+
+    int p = 0;
+
+    bool res = esPeriodico(t, p);
+    EXPECT_FALSE(res);
+    EXPECT_EQ(p, 1);
+}

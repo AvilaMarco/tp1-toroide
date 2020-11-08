@@ -21,3 +21,29 @@ TEST(toroideValidoTEST, diagonalTresPorTres) {
     };
     EXPECT_TRUE(toroideValido(t));
 }
+
+TEST(toroideValidoTEST, filasDesiguales) {
+    toroide t = { {true, false, false},
+                  {false, true, false},
+                  {false, false, true, false}
+    };
+    EXPECT_FALSE(toroideValido(t));
+}
+
+TEST(toroideValidoTEST, columnasDesiguales) {
+    toroide t = { {true, false, false},
+                  {false, true, false},
+                  {false, false, true},
+                  {true}
+    };
+    EXPECT_FALSE(toroideValido(t));
+}
+
+TEST(toroideValidoTEST, masColumnas) {
+    toroide t = { {true, false, false, false},
+                  {false, true, false, true},
+                  {false, false, true, false}
+
+    };
+    EXPECT_TRUE(toroideValido(t));
+}
