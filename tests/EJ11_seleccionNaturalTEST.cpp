@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 TEST(seleccionNaturalTEST, toroideDiagonalVsUnoVivo){
     toroide t1 = { 
                   {true, false, false},

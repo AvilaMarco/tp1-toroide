@@ -46,7 +46,7 @@ vector<posicion> posicionesVivas(toroide const &t) {
 // EJERCICIO 4
 float densidadPoblacion(toroide const &t) {
     //pre: esToroide(t)
-	float resp = -1;
+    float resp = -1;
     resp = (cantidadVivas(t)/superficieTotal(t)); //superficieTotal != 0
     return resp;
 }
@@ -101,31 +101,118 @@ bool esPeriodico(toroide const &t, int &p) {
     return false;
 }
 
+bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2){
+    //t1 -> t2
+    toroide tAux = t1;
+    while(!toroideMuerto(tAux)){
+        evolucionToroide(tAux);
+
+        if(t2 == tAux) return true;
+        else if(t1 == tAux) return false;
+    }
+    return false;
+}
+
 // EJERCICIO 10
 bool primosLejanos(toroide const &t, toroide const &u) {
-	bool resp = false;
-    // Implementacion
+    bool resp = false;
+    //pre: t muere o es Evolución ciclica; entonces el u tendria
+    //que estar entre t y t (t -> u -> t)
+
+    resp = EvolucionPrimosLejanos(t,u) || EvolucionPrimosLejanos(u,t);
+
     return resp;
 }
 
 // EJERCICIO 11
 int seleccionNatural(vector <toroide> ts) {
     int resp = -1;
-	// Implementacion
-    return resp;
+    vector<int> listaEnteros;
+    int i=0,j = 0;
+
+    for(i=0;i<ts.size();i++){
+        listaEnteros.push_back(i);
+    }
+
+    while(listaEnteros.size() > 1) {
+        for (i = 0; i < ts.size(); i++) {
+            evolucionToroide(ts[i]);
+        }
+        j=0;
+        while(j<listaEnteros.size()) {
+            if (toroideMuerto(ts[listaEnteros[j]])) {
+                listaEnteros.erase(listaEnteros.begin() + j);
+            }else j++;
+        }
+    }
+
+    // Implementacion
+    return listaEnteros[0];
 }
 
 // EJERCICIO 12
 toroide fusionar(toroide const &t, toroide const &u) {
     toroide out;
-    // Implementacion
+    out = t;
+    int i=0,j=0;
+
+    for(i=0; i <t.size(); i++){
+        for(j=0; j<t[0].size();j++){
+            if(t[i][j] && u[i][j]) out[i][j] = true;
+            else out[i][j] = false;
+        }
+    }
     return out;
+}
+
+void PosiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l){
+    int i=0,j=0,o=0,p = 0;
+    for(i=0; i <t.size(); i++){
+        for(j=0; j<t[0].size();j++) {
+            if(t[i][j]){
+                for (o = f; o < u.size(); o++) {
+                    for(p=c; p<u[0].size();p++) {
+                        if(u[o][p]&& !(k == i-o && l == j-p)){
+                            k = i+o;
+                            l = p+j;
+                            f = o;
+                            c = p;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+bool esTraslado(toroide t, toroide u, int k, int l){
+    int i=0,j = 0;
+    for(i=0; i <t.size(); i++){
+        for(j=0; j<t[0].size();j++) {
+            if(!(t[i][j] == u[(i+k +t.size()) % t.size()]
+            [(j+l+t[0].size()) % t[0].size()])) return false;
+        }
+    }
+    return true;
 }
 
 // EJERCICIO 13
 bool vistaTrasladada(toroide const &t, toroide const &u){
-	bool resp = false;
-    // Implementacion
+    //pre: misma dimension t y u
+    bool resp = false;
+    int cantVivasT = cantidadVivas(t);
+    if(cantVivasT == cantidadVivas(u)) {
+        if (cantVivasT == 1) resp = true;
+        int i=0, f=0, c=0, k=0, l=0;
+        while(!resp && i<cantVivasT){
+            PosiblesValoresTraslado(t, u,f,c ,k, l);
+            if(esTraslado(t,u,k,l)) resp = true;
+            i++;
+        }
+    }
+    //else resp = false
+
     return resp;
 }
 

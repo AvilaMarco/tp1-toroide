@@ -18,6 +18,20 @@ TEST(vistaTrasladadaTEST, muevoTerceraFilaParaArriba){
     EXPECT_TRUE(res);
 }
 
+TEST(vistaTrasladadaTEST, NoEsTraslado){
+    toroide t1 = {
+            {true, false, false}, // 1
+            {false, true, false}, // 2
+            {false, false, true}};// 3
+    toroide t2 = {
+            {false, false, true}, // 3
+            {true, false, false}, // 1
+            {false, false, false}};// 2
+
+    bool res = vistaTrasladada(t1, t2);
+    EXPECT_FALSE(res);
+}
+
 TEST(vistaTrasladadaTEST, DiagonalVsTodoTrue){
     toroide t1 = { 
                   {true, false, false},
