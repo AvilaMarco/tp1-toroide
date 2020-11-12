@@ -53,15 +53,13 @@ float densidadPoblacion(toroide const &t) {
 
 // EJERCICIO 5
 int cantidadVecinosVivos(toroide const &t, int f, int c) {
-    float resp = 0;
-    // Implementacion
+    int resp = vecinosVivos(t,f,c);
     return resp;
 }
 
 // EJERCICIO 6
 bool evolucionDePosicion(toroide const &t, posicion x) {
-	bool resp = false;
-    // Implementacion
+	bool resp = debeVivir(t, get<0>(x), get<1>(x));
     return resp;
 }
 
@@ -74,13 +72,15 @@ void evolucionToroide(toroide &t){
         }
     }
     t=tAux;
-    return;
 }
 
 // EJERCICIO 8
-toroide evolucionMultiple(toroide const &t, int K) {
-    toroide out;
+toroide evolucionMultiple(toroide const &t, int k) {
+    toroide out = t;
     // Implementacion
+    for (int i = 1; i <= k; ++i) {
+        evolucionToroide(out);
+    }
     return out;
 }
 
@@ -103,7 +103,7 @@ bool esPeriodico(toroide const &t, int &p) {
 
 // EJERCICIO 10
 bool primosLejanos(toroide const &t, toroide const &u) {
-	bool resp = false; 
+	bool resp = false;
     // Implementacion
     return resp;
 }

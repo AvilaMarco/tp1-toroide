@@ -17,5 +17,10 @@ int superficieTotal(toroide t);
 
 int vecinosVivos(toroide t, int j, int c);
 
-bool debeVivir(toroide t, int j, int c);
+bool debeVivir(toroide t, int f, int c);
+
+bool esEvolucionToroide(toroide tf, toroide ti);
+bool todosValidos(vector<toroide> ts);
+bool sonTicksConsecutivos(vector<toroide> ts);
+bool esEvolucionNivelK(toroide tf, toroide ti, int k);
 #endif //REUNIONESREMOTAS_AUXILIARES_H
