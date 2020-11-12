@@ -23,4 +23,10 @@ bool esEvolucionToroide(toroide tf, toroide ti);
 bool todosValidos(vector<toroide> ts);
 bool sonTicksConsecutivos(vector<toroide> ts);
 bool esEvolucionNivelK(toroide tf, toroide ti, int k);
+
+bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2);
+
+void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l);
+bool esTraslado(toroide t, toroide u, int k, int l);
+
 #endif //REUNIONESREMOTAS_AUXILIARES_H

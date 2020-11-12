@@ -101,18 +101,6 @@ bool esPeriodico(toroide const &t, int &p) {
     return false;
 }
 
-bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2){
-    //t1 -> t2
-    toroide tAux = t1;
-    while(!toroideMuerto(tAux)){
-        evolucionToroide(tAux);
-
-        if(t2 == tAux) return true;
-        else if(t1 == tAux) return false;
-    }
-    return false;
-}
-
 // EJERCICIO 10
 bool primosLejanos(toroide const &t, toroide const &u) {
     bool resp = false;
@@ -154,47 +142,15 @@ int seleccionNatural(vector <toroide> ts) {
 toroide fusionar(toroide const &t, toroide const &u) {
     toroide out;
     out = t;
-    int i=0,j=0;
+    int i = 0, j = 0;
 
-    for(i=0; i <t.size(); i++){
-        for(j=0; j<t[0].size();j++){
-            if(t[i][j] && u[i][j]) out[i][j] = true;
+    for (i = 0; i < t.size(); i++) {
+        for (j = 0; j < t[0].size(); j++) {
+            if (t[i][j] && u[i][j]) out[i][j] = true;
             else out[i][j] = false;
         }
     }
     return out;
-}
-
-void PosiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l){
-    int i=0,j=0,o=0,p = 0;
-    for(i=0; i <t.size(); i++){
-        for(j=0; j<t[0].size();j++) {
-            if(t[i][j]){
-                for (o = f; o < u.size(); o++) {
-                    for(p=c; p<u[0].size();p++) {
-                        if(u[o][p]&& !(k == i-o && l == j-p)){
-                            k = i+o;
-                            l = p+j;
-                            f = o;
-                            c = p;
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-bool esTraslado(toroide t, toroide u, int k, int l){
-    int i=0,j = 0;
-    for(i=0; i <t.size(); i++){
-        for(j=0; j<t[0].size();j++) {
-            if(!(t[i][j] == u[(i+k +t.size()) % t.size()]
-            [(j+l+t[0].size()) % t[0].size()])) return false;
-        }
-    }
-    return true;
 }
 
 // EJERCICIO 13
@@ -206,7 +162,7 @@ bool vistaTrasladada(toroide const &t, toroide const &u){
         if (cantVivasT == 1) resp = true;
         int i=0, f=0, c=0, k=0, l=0;
         while(!resp && i<cantVivasT){
-            PosiblesValoresTraslado(t, u,f,c ,k, l);
+            posiblesValoresTraslado(t, u, f, c, k, l);
             if(esTraslado(t,u,k,l)) resp = true;
             i++;
         }

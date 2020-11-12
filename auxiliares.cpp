@@ -1,4 +1,5 @@
 #include "definiciones.h"
+#include "ejercicios.h"
 
 using namespace std;
 // aqui se pueden ubicar todas las funciones auxiliares de soporte para la resolucion de los ejercicios
@@ -63,7 +64,54 @@ int superficieTotal(toroide t) {
     return (t.size() * t[0].size());
 }
 
+//ejercicio 10
+bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2){
+    //t1 -> t2
+    toroide tAux = t1;
+    while(!toroideMuerto(tAux)){
+        evolucionToroide(tAux);
+
+        if(t2 == tAux) return true;
+        else if(t1 == tAux) return false;
+    }
+    return false;
+}
+
+
+
 //ejercicio 13
+
+void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l){
+    int i=0,j=0,o=0,p = 0;
+    for(i=0; i <t.size(); i++){
+        for(j=0; j<t[0].size();j++) {
+            if(t[i][j]){
+                for (o = f; o < u.size(); o++) {
+                    for(p=c; p<u[0].size();p++) {
+                        if(u[o][p]&& !(k == i-o && l == j-p)){
+                            k = i+o;
+                            l = p+j;
+                            f = o;
+                            c = p;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+bool esTraslado(toroide t, toroide u, int k, int l){
+    int i=0,j = 0;
+    for(i=0; i <t.size(); i++){
+        for(j=0; j<t[0].size();j++) {
+            if(!(t[i][j] == u[(i+k +t.size()) % t.size()]
+            [(j+l+t[0].size()) % t[0].size()])) return false;
+        }
+    }
+    return true;
+}
 
 int filaToroide(int f, toroide t) {
     int var = (t.size() + f) % t.size();
