@@ -80,6 +80,7 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2){
 
 
 //ejercicio 13
+
 void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l){
     int i=0,j=0,o=0,p = 0;
     for(i=0; i <t.size(); i++){
@@ -151,58 +152,6 @@ bool debeVivir(toroide t, int f, int c) {
         return vecinosVivos(t, f, c) == 3;
     }
 }
-
-// Ejercicio 8
-bool esEvolucionToroide(toroide tf, toroide ti) {
-    bool resp = true;
-    if (tf.size() == ti.size() && tf[0].size() == ti[0].size()) {
-        for (int f = 0; f < tf.size(); ++f) {
-            for (int c = 0; c < tf[0].size(); ++c) {
-                if (!((!debeVivir(ti, f, c) && !tf[f][c]) || (debeVivir(ti, f, c) && tf[f][c]))) {
-                    resp = false;
-                    break;
-                }
-            }
-            if (!resp) break;
-        }
-        return true;
-    }
-    return false;
-}
-
-bool todosValidos(vector<toroide> ts) {
-    bool resp = true;
-    for (int i = 0; i < ts.size(); ++i) {
-        if (!esToroide(ts[i])) {
-            resp = false;
-            break;
-        }
-    }
-    return resp;
-}
-
-bool sonTicksConsecutivos(vector<toroide> ts) {
-    bool resp = true;
-    for (int i = 0; i < ts.size() - 1; ++i) {
-        if (!esEvolucionToroide(ts[i+1], ts[i])) {
-            resp = false;
-            break;
-        }
-    }
-    return resp;
-}
-
-//incompleto
-bool esEvolucionNivelK(toroide tf, toroide ti, int k) {
-    // buscar S
-    vector<toroide> s;
-    bool resp = false;
-    if (todosValidos(s) && s.size() == k + 1 && s[0] == ti && sonTicksConsecutivos(s) && s[k] == tf){
-        resp = true;
-    }
-    return resp;
-}
-
 //ejercicio 14
 int primeraVivaDesde(toroide t, int inicio){
     for (int i = 0; i < t.size(); ++i) {

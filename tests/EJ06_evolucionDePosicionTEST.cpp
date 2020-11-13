@@ -12,3 +12,15 @@ TEST(evolucionDePosicionTEST, NoRevivePorCincoVecinosVivos){
     toroide t = { {false, true, true}, {false, true, false}, {false, true, true}};
     EXPECT_FALSE(evolucionDePosicion(t, make_pair(1,0)));
 }
+TEST(evolucionDePosicionTEST, revivePorTresVecinosVivos){
+toroide t = {
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, true, true, true, false},
+        {false, false, false, false, false},
+        {false, false,true, false, false} };
+
+    EXPECT_TRUE(evolucionDePosicion(t, make_pair(1,2)));
+    EXPECT_FALSE(evolucionDePosicion(t, make_pair(3,2)));
+    EXPECT_TRUE(evolucionDePosicion(t, make_pair(2,2)));
+}
