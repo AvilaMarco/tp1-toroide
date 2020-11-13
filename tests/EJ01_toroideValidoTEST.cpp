@@ -3,6 +3,11 @@
 
 using namespace std;
 
+TEST(toroideValidoTEST, toroideFilasVacio){
+    toroide t = { };
+    EXPECT_FALSE(toroideValido(t));
+}
+
 TEST(toroideValidoTEST, toroideVacio){
     toroide t = { vector<bool> () };
     EXPECT_FALSE(toroideValido(t));

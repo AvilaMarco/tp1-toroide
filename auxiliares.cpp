@@ -24,7 +24,7 @@ int columnas(vector<vector<bool>> t) {
 }
 
 bool esRectangulo(vector<vector<bool>> r) {
-    if (filas(r) > 0 && columnas(r) > 0) {
+    if (columnas(r) > 0 && filas(r) > 0 ) {
         for (int f = 0; f < r.size(); f++) {
             if (!(r[0].size() == r[f].size())) return false;
         }
@@ -151,55 +151,4 @@ bool debeVivir(toroide t, int f, int c) {
     } else {
         return vecinosVivos(t, f, c) == 3;
     }
-}
-
-// Ejercicio 8
-bool esEvolucionToroide(toroide tf, toroide ti) {
-    bool resp = true;
-    if (tf.size() == ti.size() && tf[0].size() == ti[0].size()) {
-        for (int f = 0; f < tf.size(); ++f) {
-            for (int c = 0; c < tf[0].size(); ++c) {
-                if (!((!debeVivir(ti, f, c) && !tf[f][c]) || (debeVivir(ti, f, c) && tf[f][c]))) {
-                    resp = false;
-                    break;
-                }
-            }
-            if (!resp) break;
-        }
-        return true;
-    }
-    return false;
-}
-
-bool todosValidos(vector<toroide> ts) {
-    bool resp = true;
-    for (int i = 0; i < ts.size(); ++i) {
-        if (!esToroide(ts[i])) {
-            resp = false;
-            break;
-        }
-    }
-    return resp;
-}
-
-bool sonTicksConsecutivos(vector<toroide> ts) {
-    bool resp = true;
-    for (int i = 0; i < ts.size() - 1; ++i) {
-        if (!esEvolucionToroide(ts[i+1], ts[i])) {
-            resp = false;
-            break;
-        }
-    }
-    return resp;
-}
-
-//incompleto
-bool esEvolucionNivelK(toroide tf, toroide ti, int k) {
-    // buscar S
-    vector<toroide> s;
-    bool resp = false;
-    if (todosValidos(s) && s.size() == k + 1 && s[0] == ti && sonTicksConsecutivos(s) && s[k] == tf){
-        resp = true;
-    }
-    return resp;
 }

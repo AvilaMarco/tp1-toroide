@@ -175,6 +175,6 @@ bool vistaTrasladada(toroide const &t, toroide const &u){
 // EJERCICIO 14
 int menorSuperficieViva(toroide const &t){
 	int resp = -1;
-	// Implementacion
+
 	return resp;
 }

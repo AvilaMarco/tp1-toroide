@@ -22,3 +22,45 @@ TEST(fusionarTEST, sinInterseccion){
     toroide res = fusionar(t1, t2);
     EXPECT_EQ(res, tout);
 }
+
+TEST(fusionarTEST, mismoToroide){
+    toroide t1 = {
+            {true, false, false},
+            {false, true, false},
+            {false, false, true}};
+    toroide t2 = {
+            {true, false, false},
+            {false, true, false},
+            {false, false, true}};
+
+    toroide tout = {
+            {true, false, false},
+            {false, true, false},
+            {false, false, true}};
+
+    toroide res = fusionar(t1, t2);
+    EXPECT_EQ(res, tout);
+}
+
+TEST(fusionarTEST, interseccionConTodasVivas){
+    toroide t1 = {
+            {true, false, false,false},
+            {false, true, false, false},
+            {false, false, true, false},
+            {false, false, true, true}};
+
+    toroide t2 = {
+            {true, true, true, true},
+            {true, true, true, true},
+            {true, true, true,true},
+            {true, true, true,true}};
+
+    toroide tout = {
+            {true, false, false,false},
+            {false, true, false, false},
+            {false, false, true, false},
+            {false, false, true, true}};
+
+    toroide res = fusionar(t1, t2);
+    EXPECT_EQ(res, tout);
+}
