@@ -80,7 +80,6 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2){
 
 
 //ejercicio 13
-
 void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l){
     int i=0,j=0,o=0,p = 0;
     for(i=0; i <t.size(); i++){
@@ -202,4 +201,40 @@ bool esEvolucionNivelK(toroide tf, toroide ti, int k) {
         resp = true;
     }
     return resp;
+}
+
+//ejercicio 14
+int primeraVivaDesde(toroide t, int inicio){
+    for (int i = 0; i < t.size(); ++i) {
+        for (int j = 0; j < t[0].size(); ++j) {
+            switch (inicio) {
+                case 8:
+                    if (t[i][j]) return i;
+                    break;
+                case 2:
+                    if (t[t.size() - 1 - i][j]) return t.size() - 1 - i;
+                    break;
+                case 4:
+                    if (t[j][i]) return i;
+                    break;
+                case 6:
+                    if(t[j][t[0].size() - 1 - i]) return t[0].size() - 1 - i;
+            }
+        }
+    }
+}
+toroide trasladarHaciaArriba(toroide t){
+    vector<bool> primeraFila = t[0];
+    t.erase(t.begin());
+    t.push_back(primeraFila);
+    return t;
+}
+
+toroide trasladarHaciaDerecha(toroide t){
+    for (int i = 0; i < t.size(); ++i) {
+        bool primeraCol = t[i][0];
+        t[i].erase(t[i].begin());
+        t[i].push_back(primeraCol);
+    }
+    return t;
 }

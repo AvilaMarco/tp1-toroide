@@ -175,6 +175,30 @@ bool vistaTrasladada(toroide const &t, toroide const &u){
 // EJERCICIO 14
 int menorSuperficieViva(toroide const &t){
 	int resp = -1;
-	// Implementacion
+	toroide auxT = t;
+
+    int toroideAlturaMin = t.size();
+    for (int i = 0; i < t.size(); ++i) {
+        int primerViva = primeraVivaDesde(auxT, 8);
+        int ultimaViva = primeraVivaDesde(auxT, 2);
+        int alturaToroide = ultimaViva - primerViva + 1;
+        if(toroideAlturaMin > alturaToroide){
+            toroideAlturaMin = alturaToroide;
+        }
+        auxT = trasladarHaciaArriba(auxT);
+    }
+
+    int toroideAnchoMin = t[0].size();
+    for (int i = 0; i < t.size(); ++i) {
+        int primerViva = primeraVivaDesde(auxT, 4);
+        int ultimaViva = primeraVivaDesde(auxT, 6);
+        int anchoToroide = ultimaViva - primerViva + 1;
+        if(toroideAnchoMin > anchoToroide){
+            toroideAnchoMin = anchoToroide;
+        }
+        auxT = trasladarHaciaDerecha(auxT);
+    }
+
+    resp = toroideAlturaMin * toroideAnchoMin;
 	return resp;
 }

@@ -29,4 +29,9 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2);
 void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l);
 bool esTraslado(toroide t, toroide u, int k, int l);
 
+//ejercicio 14
+int primeraVivaDesde(toroide t, int inicio);
+toroide trasladarHaciaArriba(toroide t);
+toroide trasladarHaciaDerecha(toroide t);
+
 #endif //REUNIONESREMOTAS_AUXILIARES_H
