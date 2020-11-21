@@ -39,5 +39,5 @@ TEST(esPeriodicoTEST, toroideHorizontalMuere){
 
     bool res = esPeriodico(t, p);
     EXPECT_FALSE(res);
-    EXPECT_EQ(p, 1);
+    EXPECT_EQ(p, 0);
 }

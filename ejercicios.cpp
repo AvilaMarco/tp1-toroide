@@ -15,10 +15,10 @@ bool toroideValido(vector<vector<bool>> const &t) {
 // EJERCICIO 2
 bool toroideMuerto(toroide const &t) {
     bool resp = true;
-    int f,c =0;
-    for(f=0; f<t.size(); f++){
-        for(c=0; c<t[0].size(); c++){
-            if(enRangoToroide(f,c,t) && !(t[f][c] == false)){
+    int i,j;
+    for(i=0; i < t.size(); i++){
+        for(j=0; j < t[0].size(); j++){
+            if(!(t[i][j] == false)){
                 resp = false;
             }
         }
@@ -47,7 +47,9 @@ vector<posicion> posicionesVivas(toroide const &t) {
 float densidadPoblacion(toroide const &t) {
     //pre: esToroide(t)
     float resp = -1;
-    resp = (cantidadVivas(t)/superficieTotal(t)); //superficieTotal != 0
+    float cantVivas = cantidadVivas(t);
+    float sup = superficieTotal(t);
+    resp = (cantVivas/sup); //superficieTotal != 0
     return resp;
 }
 
@@ -89,16 +91,16 @@ bool esPeriodico(toroide const &t, int &p) {
     //pre: t muere o es Evolución ciclica
     toroide tAux = t;
 
-    p=0;
+    int pAux = 0;
 
-    while(!toroideMuerto(tAux)){
+    do{
         evolucionToroide(tAux);
-        p++;
+        pAux++;
+    }while(!toroideMuerto(tAux) && tAux != t);
 
-        if(tAux == t) return true;
-    }
+    if(t==tAux) p = pAux;
 
-    return false;
+    return t==tAux;
 }
 
 // EJERCICIO 10
@@ -116,7 +118,7 @@ bool primosLejanos(toroide const &t, toroide const &u) {
 int seleccionNatural(vector <toroide> ts) {
     int resp = -1;
     vector<int> listaEnteros;
-    int i=0,j = 0;
+    int i,j = 0;
 
     for(i=0;i<ts.size();i++){
         listaEnteros.push_back(i);
@@ -142,7 +144,7 @@ int seleccionNatural(vector <toroide> ts) {
 toroide fusionar(toroide const &t, toroide const &u) {
     toroide out;
     out = t;
-    int i = 0, j = 0;
+    int i, j;
 
     for (i = 0; i < t.size(); i++) {
         for (j = 0; j < t[0].size(); j++) {
@@ -163,7 +165,7 @@ bool vistaTrasladada(toroide const &t, toroide const &u){
         int i=0, f=0, c=0, k=0, l=0;
         while(!resp && i<cantVivasT){
             posiblesValoresTraslado(t, u, f, c, k, l);
-            if(esTraslado(t,u,k,l)) resp = true;
+            resp = esTraslado(t,u,k,l);
             i++;
         }
     }

@@ -54,8 +54,7 @@ TEST(posicionesVivasTEST, vivasEnRangoToroide){
 
     if(cantidadVivas(t) == res.size()) {
         for (int i = 0; i < res.size(); i++) {
-            if (enRangoToroide(res[i].first, res[i].second, t)
-                && t[res[i].first][res[i].second])
+            if (t[res[i].first][res[i].second])
                 vivas.push_back(mp(res[i].first, res[i].second));
         }
     }

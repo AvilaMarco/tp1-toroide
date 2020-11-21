@@ -57,3 +57,16 @@ TEST(vistaTrasladadaTEST, DiagonalVsTodoTrue){
     bool res = vistaTrasladada(t1, t2);
     EXPECT_FALSE(res);
 }
+
+TEST(vistaTrasladadaTEST, esTrasladoDeUnPar){
+    toroide t1 = {
+            {false, false, false},
+            {true, false, false},
+            {true, false, false}};
+    toroide t2 = {
+            {false, false, false},
+            {false, false, true},
+            {false, false, true}};
+    bool res = vistaTrasladada(t1, t2);
+    EXPECT_TRUE(res);
+}
