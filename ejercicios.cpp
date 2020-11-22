@@ -47,8 +47,8 @@ vector<posicion> posicionesVivas(toroide const &t) {
 float densidadPoblacion(toroide const &t) {
     //pre: esToroide(t)
     float resp = -1;
-    float cantVivas = cantidadVivas(t);
-    float sup = superficieTotal(t);
+    float cantVivas = (float)cantidadVivas(t);
+    float sup = (float)superficieTotal(t);
     resp = (cantVivas/sup); //superficieTotal != 0
     return resp;
 }
@@ -118,26 +118,25 @@ bool primosLejanos(toroide const &t, toroide const &u) {
 int seleccionNatural(vector <toroide> ts) {
     int resp = -1;
     vector<int> listaEnteros;
-    int i,j = 0;
+    int i,cantVivos = 0, indexSeleccion=0;
 
     for(i=0;i<ts.size();i++){
         listaEnteros.push_back(i);
     }
 
-    while(listaEnteros.size() > 1) {
+     do{
+        cantVivos=0;
         for (i = 0; i < ts.size(); i++) {
-            evolucionToroide(ts[i]);
+            if(!toroideMuerto(ts[i])){
+                evolucionToroide(ts[i]);
+                cantVivos++;
+                indexSeleccion = i;
+            }
         }
-        j=0;
-        while(j<listaEnteros.size()) {
-            if (toroideMuerto(ts[listaEnteros[j]])) {
-                listaEnteros.erase(listaEnteros.begin() + j);
-            }else j++;
-        }
-    }
+    }while(cantVivos > 1);
 
     // Implementacion
-    return listaEnteros[0];
+    return indexSeleccion;
 }
 
 // EJERCICIO 12

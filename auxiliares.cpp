@@ -56,7 +56,7 @@ int columnas(vector<vector<bool>> t) {
 
 bool esRectangulo(vector<vector<bool>> r) {
     if (columnas(r) > 0 && filas(r) > 0 ) {
-        for (int i = 0; i < r.size(); f++) {
+        for (int i = 0; i < r.size(); i++) {
             if (!(r[0].size() == r[i].size())) return false;
         }
     }

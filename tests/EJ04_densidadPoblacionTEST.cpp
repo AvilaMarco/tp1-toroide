@@ -13,7 +13,7 @@ TEST(densidadPoblacionTEST, toroideUnaViva){
     vector<bool> a = { false, false, false, false };
     vector<bool> b = { true, false, false, false };
     toroide t = { a, b, a, a };
-    EXPECT_NEAR(densidadPoblacion(t), 0.0625, 0.001);
+    EXPECT_NEAR(densidadPoblacion(t), 0.0625, 0.001); //1/16
 }
 
 TEST(densidadPoblacionTEST, toroideDiezPorDiez){
