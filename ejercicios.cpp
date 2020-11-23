@@ -117,14 +117,9 @@ bool primosLejanos(toroide const &t, toroide const &u) {
 // EJERCICIO 11
 int seleccionNatural(vector <toroide> ts) {
     int resp = -1;
-    vector<int> listaEnteros;
     int i,cantVivos = 0, indexSeleccion=0;
 
-    for(i=0;i<ts.size();i++){
-        listaEnteros.push_back(i);
-    }
-
-     do{
+    do{
         cantVivos=0;
         for (i = 0; i < ts.size(); i++) {
             if(!toroideMuerto(ts[i])){

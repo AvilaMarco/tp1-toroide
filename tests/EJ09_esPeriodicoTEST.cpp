@@ -17,6 +17,31 @@ TEST(esPeriodicoTEST, toroideHorizontalPeriodico2){
     EXPECT_EQ(p, 2);
 }
 
+TEST(esPeriodicoTEST, toroideHorizontalPeriodicoDoble){
+    toroide t = {
+            {false, false, false, false, false},
+            {false, false, false, false, false},
+            {false, true, true, true, false},
+            {false, false, false, false, false},
+            {false, false,false, false, false} };
+
+    toroide u = {
+            {false, false, false, false, false},
+            {false, false, true, false, false},
+            {false, false, true, false, false},
+            {false, false, true, false, false},
+            {false, false, false, false, false} };
+
+    int p;
+    bool res = esPeriodico(t, p);
+    EXPECT_TRUE(res);
+    EXPECT_EQ(p, 2);
+
+    res = esPeriodico(u, p);
+    EXPECT_TRUE(res);
+    EXPECT_EQ(p, 2);
+}
+
 TEST(esPeriodicoTEST, toroidePeriodico){
     toroide t = {
             {false, false, false, false, false},

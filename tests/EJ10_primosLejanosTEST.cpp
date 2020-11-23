@@ -41,6 +41,71 @@ TEST(primosLejanosTEST, toroideHorizontalPeriodico){
     res = primosLejanos(t2, t1);
     EXPECT_FALSE(res);
 }
+
+TEST(primosLejanosTEST, toroideHorizontalPeriodicoIguales){
+    toroide t1 = {
+            {false, false, false, false, false},
+            {false, false, false, false, false},
+            {false, true, true, true, false},
+            {false, false, false, false, false},
+            {false, false,false, false, false} };
+    toroide t2 = {
+            {false, false, false, false, false},
+            {false, false, false, false, false},
+            {false, true, true, true, false},
+            {false, false, false, false, false},
+            {false, false,false, false, false} };
+    bool res = primosLejanos(t1, t2);
+    EXPECT_TRUE(res);
+    res = primosLejanos(t2, t1);
+    EXPECT_TRUE(res);
+}
+
+TEST(primosLejanosTEST, toroideHorizontalMuere){
+    toroide t1 = {
+            {true, false, false},
+            {false, true, false},
+            {false, false, true}};
+    toroide t2 = {
+            {false, false, false},
+            {false, false, false},
+            {false, false, false}};
+    bool res = primosLejanos(t1, t2);
+    EXPECT_TRUE(res);
+    res = primosLejanos(t2, t1);
+    EXPECT_TRUE(res);
+}
+
+TEST(primosLejanosTEST, toroideHorizontalIGUALES){
+    toroide t1 = {
+            {true, false, false},
+            {false, true, false},
+            {false, false, true}};
+    toroide t2 = {
+            {true, false, false},
+            {false, true, false},
+            {false, false, true}};
+    bool res = primosLejanos(t1, t2);
+    EXPECT_FALSE(res);
+    res = primosLejanos(t2, t1);
+    EXPECT_FALSE(res);
+}
+
+TEST(primosLejanosTEST, toroideHorizontalIgualesMuertos){
+    toroide t1 = {
+            {false, false, false},
+            {false, false, false},
+            {false, false, false}};
+    toroide t2 = {
+            {false, false, false},
+            {false, false, false},
+            {false, false, false}};
+    bool res = primosLejanos(t1, t2);
+    EXPECT_FALSE(res);
+    res = primosLejanos(t2, t1);
+    EXPECT_FALSE(res);
+}
+
 TEST(primosLejanosTEST, toroidePeriodico) {
     toroide t1 = {
             {false, false, false, false, false},
