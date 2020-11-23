@@ -5,6 +5,7 @@
 #define REUNIONESREMOTAS_AUXILIARES_H
 
 #include "definiciones.h"
+#include <string>
 
 using namespace std;
 // definir aqui las funciones
@@ -30,7 +31,7 @@ void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& 
 bool esTraslado(toroide t, toroide u, int k, int l);
 
 //ejercicio 14
-int primeraVivaDesde(toroide t, int inicio);
+int primeraVivaDesde(toroide t, string inicio);
 toroide trasladarHaciaArriba(toroide t);
 toroide trasladarHaciaDerecha(toroide t);
 

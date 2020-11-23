@@ -180,8 +180,8 @@ int menorSuperficieViva(toroide const &t){
 
     int toroideAlturaMin = t.size();
     for (int i = 0; i < t.size(); ++i) {
-        int primerViva = primeraVivaDesde(auxT, 8);
-        int ultimaViva = primeraVivaDesde(auxT, 2);
+        int primerViva = primeraVivaDesde(auxT, "arriba");
+        int ultimaViva = primeraVivaDesde(auxT, "abajo");
         int alturaToroide = ultimaViva - primerViva + 1;
         if(toroideAlturaMin > alturaToroide){
             toroideAlturaMin = alturaToroide;
@@ -191,8 +191,8 @@ int menorSuperficieViva(toroide const &t){
 
     int toroideAnchoMin = t[0].size();
     for (int i = 0; i < t.size(); ++i) {
-        int primerViva = primeraVivaDesde(auxT, 4);
-        int ultimaViva = primeraVivaDesde(auxT, 6);
+        int primerViva = primeraVivaDesde(auxT, "izquierda");
+        int ultimaViva = primeraVivaDesde(auxT, "derecha");
         int anchoToroide = ultimaViva - primerViva + 1;
         if(toroideAnchoMin > anchoToroide){
             toroideAnchoMin = anchoToroide;

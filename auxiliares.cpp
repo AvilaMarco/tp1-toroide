@@ -1,5 +1,6 @@
 #include "definiciones.h"
 #include "ejercicios.h"
+#include <string>
 
 using namespace std;
 // aqui se pueden ubicar todas las funciones auxiliares de soporte para la resolucion de los ejercicios
@@ -30,7 +31,7 @@ int vecinosVivos(toroide t, int f, int c) {
     int cantVecinasVivas = 0;
     for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
-            if ((j != 0 || i != 0) && t[filaToroide(f+i, t)][columnaToroide(c+j, t)]) {
+            if ((j != 0 || i != 0) && t[filaToroide(f + i, t)][columnaToroide(c + j, t)]) {
                 cantVecinasVivas++;
             }
         }
@@ -55,7 +56,7 @@ int columnas(vector<vector<bool>> t) {
 }
 
 bool esRectangulo(vector<vector<bool>> r) {
-    if (columnas(r) > 0 && filas(r) > 0 ) {
+    if (columnas(r) > 0 && filas(r) > 0) {
         for (int i = 0; i < r.size(); i++) {
             if (!(r[0].size() == r[i].size())) return false;
         }
@@ -96,14 +97,14 @@ int superficieTotal(toroide t) {
 }
 
 //ejercicio 10
-bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2){
+bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2) {
     //t1 -> t2
     bool primosLejanos = false;
     toroide tAux = t1;
     evolucionToroide(tAux);
 
-    while(!toroideMuerto(tAux) && !primosLejanos && t1 != tAux){
-        if(t2 == tAux) primosLejanos = true;
+    while (!toroideMuerto(tAux) && !primosLejanos && t1 != tAux) {
+        if (t2 == tAux) primosLejanos = true;
         evolucionToroide(tAux);
     }
     return primosLejanos;
@@ -113,16 +114,16 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2){
 
 //ejercicio 13
 
-void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l){
-    int i=0,j=0,o=0,p = 0;
-    for(i=0; i <t.size() && k==0 && l==0; i++){
-        for(j=0; j<t[0].size() && k==0 && l==0;j++) {
-            if(t[i][j]){
-                for (o = f; o < u.size() && !(k == i-o && l == j-p); o++) {
-                    for(p=c; p<u[0].size() && !(k == i-o && l == j-p); p++) {
-                        if(u[o][p]){
-                            k = i+o;
-                            l = p+j;
+void posiblesValoresTraslado(toroide t, toroide u, int &f, int &c, int &k, int &l) {
+    int i = 0, j = 0, o = 0, p = 0;
+    for (i = 0; i < t.size() && k == 0 && l == 0; i++) {
+        for (j = 0; j < t[0].size() && k == 0 && l == 0; j++) {
+            if (t[i][j]) {
+                for (o = f; o < u.size() && !(k == i - o && l == j - p); o++) {
+                    for (p = c; p < u[0].size() && !(k == i - o && l == j - p); p++) {
+                        if (u[o][p]) {
+                            k = i + o;
+                            l = p + j;
                             f = o;
                             c = p;
                         }
@@ -133,53 +134,61 @@ void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& 
     }
 }
 
-bool esTraslado(toroide t, toroide u, int k, int l){
-    int i=0,j = 0;
+bool esTraslado(toroide t, toroide u, int k, int l) {
+    int i = 0, j = 0;
     bool traslado = true;
-    for(i=0; i <t.size() && traslado; i++){
-        for(j=0; j<t[0].size() && traslado; j++) {
-            traslado = (t[i][j] == u[(i+k +t.size()) % t.size()]
-            [(j+l+t[0].size()) % t[0].size()]);
+    for (i = 0; i < t.size() && traslado; i++) {
+        for (j = 0; j < t[0].size() && traslado; j++) {
+            traslado = (t[i][j] == u[(i + k + t.size()) % t.size()]
+            [(j + l + t[0].size()) % t[0].size()]);
         }
     }
     return traslado;
 }
 
 //ejercicio 14
-int primeraVivaDesde(toroide t, int inicio){
+int primeraVivaDesde(toroide t, string inicio) {
     int primeraViva = -1;
-    for (int i = 0; i < t.size() && primeraViva == -1; ++i) {
-        for (int j = 0; j < t[0].size() && primeraViva == -1 ; ++j) {
-            switch (inicio) {
-                case 8:
-                    if (t[i][j]) primeraViva = i;
-                    break;
-                case 2:
-                    if (t[t.size() - 1 - i][j]) primeraViva = t.size() - 1 - i;
-                    break;
-                case 4:
-                    if (t[j][i]) primeraViva = i;
-                    break;
-                case 6:
-                    if (t[j][t[0].size() - 1 - i]) primeraViva = t[0].size() - 1 - i;
+    bool esArriba = inicio == "arriba";
+    bool esAbajo = inicio == "abajo";
+
+    if (esArriba || esAbajo) {
+        for (int f = 0; f < filas(t) && primeraViva == -1; ++f) {
+            for (int c = 0; c < columnas(t); ++c) {
+                if (esArriba && t[f][c]) {
+                    primeraViva = f;
+                } else if (esAbajo && t[filas(t) - 1 - f][c]) {
+                    primeraViva = filas(t) - 1 - f;
+                }
+            }
+        }
+    } else {
+        for (int c = 0; c < columnas(t) && primeraViva == -1; ++c) {
+            for (int f = 0; f < filas(t); ++f) {
+                if (inicio == "izquierda" && t[f][c]) {
+                    primeraViva = c;
+                } else if (inicio == "derecha" && t[f][columnas(t) - 1 - c]) {
+                    primeraViva = columnas(t) - 1 - c;
+                }
             }
         }
     }
+
     return primeraViva;
 }
 
-toroide trasladarHaciaArriba(toroide t){
-    vector<bool> primeraFila = t[0];
-    t.erase(t.begin());
-    t.push_back(primeraFila);
+toroide trasladarHaciaArriba(toroide t) {
+    for (int f = 0; f < filas(t) - 1; ++f) {
+        swap(t[f], t[f + 1]);
+    }
     return t;
 }
 
-toroide trasladarHaciaDerecha(toroide t){
-    for (int i = 0; i < t.size(); ++i) {
-        bool primeraCol = t[i][0];
-        t[i].erase(t[i].begin());
-        t[i].push_back(primeraCol);
+toroide trasladarHaciaDerecha(toroide t) {
+    for (int f = 0; f < filas(t); ++f) {
+        for (int c = 0; c < columnas(t) - 1; ++c) {
+            swap(t[f][c], t[f][c + 1]);
+        }
     }
     return t;
 }
