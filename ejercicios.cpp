@@ -123,14 +123,14 @@ int seleccionNatural(vector <toroide> ts) {
     for(i=0;i<ts.size();i++){
         listaEnteros.push_back(i);
     }
-
+//cambios devuelvo el primer indice del arr
      do{
         cantVivos=0;
         for (i = 0; i < ts.size(); i++) {
-            if(!toroideMuerto(ts[i])){
-                evolucionToroide(ts[i]);
+            if(!toroideMuerto(ts[ts.size() - 1 - i])){
+                evolucionToroide(ts[ts.size() - 1 - i]);
                 cantVivos++;
-                indexSeleccion = i;
+                indexSeleccion = ts.size() - 1 - i;
             }
         }
     }while(cantVivos > 1);
