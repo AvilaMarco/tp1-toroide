@@ -17,7 +17,7 @@ bool enRangoToroide(int f, int c, vector<vector<bool>> t);
 int cantidadVivas(toroide t);
 int superficieTotal(toroide t);
 
-int vecinosVivos(toroide t, int j, int c);
+int vecinosVivos(toroide t, int f0, int c0);
 int filas(vector<vector<bool>> t);
 int columnas(vector<vector<bool>> t);
 bool debeVivir(toroide t, int f, int c);
