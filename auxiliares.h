@@ -18,7 +18,8 @@ int cantidadVivas(toroide t);
 int superficieTotal(toroide t);
 
 int vecinosVivos(toroide t, int j, int c);
-
+int filas(vector<vector<bool>> t);
+int columnas(vector<vector<bool>> t);
 bool debeVivir(toroide t, int f, int c);
 
 bool todosValidos(vector<toroide> ts);

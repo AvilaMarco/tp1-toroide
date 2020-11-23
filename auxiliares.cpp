@@ -101,13 +101,16 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2) {
     //t1 -> t2
     bool primosLejanos = false;
     toroide tAux = t1;
-    evolucionToroide(tAux);
 
+    int p = 0;
+    if(!esPeriodico(t1,p) && toroideMuerto(t2)) primosLejanos = true;
+
+    evolucionToroide(tAux);
     while (!toroideMuerto(tAux) && !primosLejanos && t1 != tAux) {
         if (t2 == tAux) primosLejanos = true;
         evolucionToroide(tAux);
     }
-    return primosLejanos;
+    return primosLejanos || (t2 == tAux && !toroideMuerto(tAux)); //esPeriodico y son iguales
 }
 
 
