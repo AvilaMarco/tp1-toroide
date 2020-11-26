@@ -113,42 +113,6 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2) {
     return primosLejanos || (t2 == tAux && !toroideMuerto(tAux)); //esPeriodico y son iguales
 }
 
-
-
-//ejercicio 13
-
-void posiblesValoresTraslado(toroide t, toroide u, int &f, int &c, int &k, int &l) {
-    int i = 0, j = 0, o = 0, p = 0;
-    for (i = 0; i < t.size() && k == 0 && l == 0; i++) {
-        for (j = 0; j < t[0].size() && k == 0 && l == 0; j++) {
-            if (t[i][j]) {
-                for (o = f; o < u.size() && !(k == i - o && l == j - p); o++) {
-                    for (p = c; p < u[0].size() && !(k == i - o && l == j - p); p++) {
-                        if (u[o][p]) {
-                            k = i + o;
-                            l = p + j;
-                            f = o;
-                            c = p;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-bool esTraslado(toroide t, toroide u, int k, int l) {
-    int i = 0, j = 0;
-    bool traslado = true;
-    for (i = 0; i < t.size() && traslado; i++) {
-        for (j = 0; j < t[0].size() && traslado; j++) {
-            traslado = (t[i][j] == u[(i + k + t.size()) % t.size()]
-            [(j + l + t[0].size()) % t[0].size()]);
-        }
-    }
-    return traslado;
-}
-
 //ejercicio 14
 int primeraVivaDesde(toroide t, string inicio) {
     int primeraViva = -1;
@@ -194,4 +158,31 @@ toroide trasladarHaciaDerecha(toroide t) {
         }
     }
     return t;
+}
+
+//ejercicio 13
+
+void valoresTraslado(vector<toroide>& ts, toroide t) {
+    int f, c ;
+    toroide tAux = t;
+    for (f = 0; f < t.size(); f++) {
+        tAux = trasladarHaciaArriba(tAux);
+        ts.push_back(tAux);
+        for (c = 0; c < t[0].size(); c++) {
+            tAux = trasladarHaciaDerecha(tAux);
+            ts.push_back(tAux);
+        }
+    }
+}
+
+bool esTraslado(toroide t, toroide u, int k, int l) {
+    int i = 0, j = 0;
+    bool traslado = true;
+    for (i = 0; i < t.size() && traslado; i++) {
+        for (j = 0; j < t[0].size() && traslado; j++) {
+            traslado = (t[i][j] == u[(i + k + t.size()) % t.size()]
+            [(j + l + t[0].size()) % t[0].size()]);
+        }
+    }
+    return traslado;
 }

@@ -153,14 +153,17 @@ toroide fusionar(toroide const &t, toroide const &u) {
 bool vistaTrasladada(toroide const &t, toroide const &u){
     //pre: misma dimension t y u
     bool resp = false;
-    int cantVivasT = cantidadVivas(t);
-    if(cantVivasT == cantidadVivas(u)) {
-        if (cantVivasT == 1) resp = true;
-        int i=0, f=0, c=0, k=0, l=0;
-        while(!resp && i<cantVivasT){
-            posiblesValoresTraslado(t, u, f, c, k, l);
-            resp = esTraslado(t,u,k,l);
-            i++;
+
+    vector<toroide> ts;
+
+    valoresTraslado(ts, t);
+
+    if(cantidadVivas(t) == cantidadVivas(u)) {
+        for(int i = 0; i < ts.size(); i++){
+            if(ts[i] == u){
+                resp = true;
+            }
+
         }
     }
     //else resp = false

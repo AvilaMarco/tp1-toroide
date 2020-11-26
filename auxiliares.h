@@ -28,7 +28,7 @@ bool esEvolucionNivelK(toroide tf, toroide ti, int k);
 
 bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2);
 
-void posiblesValoresTraslado(toroide t, toroide u, int& f, int& c, int& k, int& l);
+void valoresTraslado(vector<toroide>& ts, toroide t) ;
 bool esTraslado(toroide t, toroide u, int k, int l);
 
 //ejercicio 14

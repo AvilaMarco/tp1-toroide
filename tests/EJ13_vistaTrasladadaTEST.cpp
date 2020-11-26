@@ -64,8 +64,8 @@ TEST(vistaTrasladadaTEST, esTrasladoDeUnPar){
             {true, false, false},
             {true, false, false}};
     toroide t2 = {
-            {false, false, false},
             {false, false, true},
+            {false, false, false},
             {false, false, true}};
     bool res = vistaTrasladada(t1, t2);
     EXPECT_TRUE(res);
