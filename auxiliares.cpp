@@ -1,5 +1,6 @@
 #include "definiciones.h"
 #include "ejercicios.h"
+#include "auxiliares.h"
 #include <string>
 
 using namespace std;
@@ -18,20 +19,20 @@ vector<posicion> ordenar(vector<posicion> &v) {
 
 //General
 int filaToroide(int f, toroide t) {
-    int var = (t.size() + f) % t.size();
+    int var = (filas(t) + f) % filas(t);
     return var;
 }
 
 int columnaToroide(int c, toroide t) {
-    int var = (t[0].size() + c) % t[0].size();
+    int var = (columnas(t) + c) % columnas(t);
     return var;
 }
 
-int vecinosVivos(toroide t, int f, int c) {
+int vecinosVivos(toroide t, int f0, int c0) {
     int cantVecinasVivas = 0;
-    for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
-            if ((j != 0 || i != 0) && t[filaToroide(f + i, t)][columnaToroide(c + j, t)]) {
+    for (int f = -1; f <= 1; f++) {
+        for (int c = -1; c <= 1; c++) {
+            if ((c != 0 || f != 0) && t[filaToroide(f0 + f, t)][columnaToroide(c0 + c, t)]) {
                 cantVecinasVivas++;
             }
         }
@@ -47,7 +48,6 @@ bool debeVivir(toroide t, int f, int c) {
     }
 }
 
-//ejercicio1
 int filas(vector<vector<bool>> t) { return t.size(); }
 
 int columnas(vector<vector<bool>> t) {
@@ -55,6 +55,7 @@ int columnas(vector<vector<bool>> t) {
     else return 0;
 }
 
+//ejercicio1
 bool esRectangulo(vector<vector<bool>> r) {
     if (columnas(r) > 0 && filas(r) > 0) {
         for (int i = 0; i < r.size(); i++) {
@@ -80,9 +81,9 @@ bool enRangoToroide(int f, int c, vector<vector<bool>> t) {
 //ejercicio 3
 int cantidadVivas(toroide t) {
     int cantVivas = 0;
-    for (int i = 0; i < t.size(); i++) {
-        for (int j = 0; j < t[i].size(); j++) {
-            if (t[i][j]) {
+    for (int f = 0; f < filas(t); f++) {
+        for (int c = 0; c < columnas(t); c++) {
+            if (t[f][c]) {
                 cantVivas++;
             }
         }
@@ -93,7 +94,7 @@ int cantidadVivas(toroide t) {
 //ejercicio 4
 int superficieTotal(toroide t) {
     //pre: esToroide(t)
-    return (t.size() * t[0].size());
+    return (filas(t) * columnas(t));
 }
 
 //ejercicio 10
