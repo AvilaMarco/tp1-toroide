@@ -11,6 +11,9 @@ bazel-testlogs
 # python
 *.pyc
 
+#Ignore .exe
+*.exe
+
 # Visual Studio files
 *.sdf
 *.opensdf

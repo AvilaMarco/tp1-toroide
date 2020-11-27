@@ -64,3 +64,28 @@ TEST(fusionarTEST, interseccionConTodasVivas){
     toroide res = fusionar(t1, t2);
     EXPECT_EQ(res, tout);
 }
+
+TEST(fusionarTEST, interseccionNoCuadrados){
+    toroide t1 = {
+            {true, true, false},
+            {false, true, false},
+            {true, true, true},
+            {true, true, false},
+            {false, true, true}};
+    toroide t2 = {
+            {false, true, true},
+            {true, true, true},
+            {true, true, true},
+            {false, true, true},
+            {true, true, false}};
+
+    toroide tout = {
+            {false, true, false},
+            {false, true, false},
+            {true, true, true},
+            {false, true, false},
+            {false, true, false}};
+
+    toroide res = fusionar(t1, t2);
+    EXPECT_EQ(res, tout);
+}

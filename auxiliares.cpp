@@ -70,13 +70,6 @@ bool esToroide(vector<vector<bool>> t) {
     result = esRectangulo(t) && filas(t) >= 3 && columnas(t) >= 3;
     return result;
 }
-/*
-//ejercicio 2
-bool enRango(int i, vector<bool> s) { return i < s.size(); }
-
-bool enRangoToroide(int f, int c, vector<vector<bool>> t) {
-    return f < t.size() && enRango(c, t[f]);
-}*/
 
 //ejercicio 3
 int cantidadVivas(toroide t) {
@@ -102,8 +95,8 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2) {
     //t1 -> t2
     bool primosLejanos = false;
     toroide tAux = t1;
-
     int p = 0;
+
     if(!esPeriodico(t1,p) && toroideMuerto(t2)) primosLejanos = true;
 
     evolucionToroide(tAux);
@@ -166,24 +159,12 @@ toroide trasladarHaciaDerecha(toroide t) {
 void valoresTraslado(vector<toroide>& ts, toroide t) {
     int f, c ;
     toroide tAux = t;
-    for (f = 0; f < t.size(); f++) {
+    for (f = 0; f < filas(t); f++) {
         tAux = trasladarHaciaArriba(tAux);
         ts.push_back(tAux);
-        for (c = 0; c < t[0].size(); c++) {
+        for (c = 0; c < columnas(t); c++) {
             tAux = trasladarHaciaDerecha(tAux);
             ts.push_back(tAux);
         }
     }
-}
-
-bool esTraslado(toroide t, toroide u, int k, int l) {
-    int i = 0, j = 0;
-    bool traslado = true;
-    for (i = 0; i < t.size() && traslado; i++) {
-        for (j = 0; j < t[0].size() && traslado; j++) {
-            traslado = (t[i][j] == u[(i + k + t.size()) % t.size()]
-            [(j + l + t[0].size()) % t[0].size()]);
-        }
-    }
-    return traslado;
 }

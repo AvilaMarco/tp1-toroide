@@ -79,7 +79,6 @@ void evolucionToroide(toroide &t) {
 // EJERCICIO 8
 toroide evolucionMultiple(toroide const &t, int k) {
     toroide out = t;
-    // Implementacion
     for (int i = 1; i <= k; ++i) {
         evolucionToroide(out);
     }
@@ -90,7 +89,6 @@ toroide evolucionMultiple(toroide const &t, int k) {
 bool esPeriodico(toroide const &t, int &p) {
     //pre: t muere o es Evolución ciclica
     toroide tAux = t;
-
     int pAux = 0;
 
     do {
@@ -116,7 +114,6 @@ bool primosLejanos(toroide const &t, toroide const &u) {
 
 // EJERCICIO 11
 int seleccionNatural(vector<toroide> ts) {
-    int resp = -1;
     int i,cantVivos = 0, indexSeleccion=0;
 
     do {
@@ -130,7 +127,6 @@ int seleccionNatural(vector<toroide> ts) {
         }
     } while (cantVivos > 1);
 
-    // Implementacion
     return indexSeleccion;
 }
 
@@ -153,7 +149,6 @@ toroide fusionar(toroide const &t, toroide const &u) {
 bool vistaTrasladada(toroide const &t, toroide const &u) {
     //pre: misma dimension t y u
     bool resp = false;
-
     vector<toroide> ts;
 
     valoresTraslado(ts, t);
@@ -163,10 +158,8 @@ bool vistaTrasladada(toroide const &t, toroide const &u) {
             if(ts[i] == u){
                 resp = true;
             }
-
         }
     }
-    //else resp = false
 
     return resp;
 }
