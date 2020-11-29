@@ -16,6 +16,7 @@ bool toroideValido(vector<vector<bool>> const &t) {
 bool toroideMuerto(toroide const &t) {
     bool resp = true;
     int f, c;
+
     for (f = 0; f < filas(t); f++) {
         for (c = 0; c < columnas(t); c++) {
             if (t[f][c]) {
@@ -107,7 +108,7 @@ bool primosLejanos(toroide const &t, toroide const &u) {
     //pre: t muere o es Evolución ciclica; entonces el u tendria
     //que estar entre t y t (t -> u -> t)
 
-    resp = EvolucionPrimosLejanos(t, u) || EvolucionPrimosLejanos(u, t);
+    resp = evolucionPrimosLejanos(t, u) || evolucionPrimosLejanos(u, t);
 
     return resp;
 }
@@ -151,7 +152,7 @@ bool vistaTrasladada(toroide const &t, toroide const &u) {
     bool resp = false;
     vector<toroide> ts;
 
-    valoresTraslado(ts, t);
+    valoresTraslados(ts, t);
 
     if(cantidadVivas(t) == cantidadVivas(u)) {
         for(int i = 0; i < ts.size(); i++){

@@ -18,16 +18,21 @@ vector<posicion> ordenar(vector<posicion> &v) {
 }
 
 //General
-int filaToroide(int f, toroide t) {
-    int var = (filas(t) + f) % filas(t);
-    return var;
+int filas(vector<vector<bool>> t) { return t.size(); }
+
+int columnas(vector<vector<bool>> t) {
+    if (t.size() > 0) return t[0].size();
+    else return 0;
 }
 
-int columnaToroide(int c, toroide t) {
-    int var = (columnas(t) + c) % columnas(t);
-    return var;
+bool debeVivir(toroide t, int f, int c) {
+    if (t[f][c]) {
+        return (vecinosVivos(t, f, c) == 2 || vecinosVivos(t, f, c) == 3);
+    } else {
+        return vecinosVivos(t, f, c) == 3;
+    }
 }
-
+//
 int vecinosVivos(toroide t, int f0, int c0) {
     int cantVecinasVivas = 0;
     for (int f = -1; f <= 1; f++) {
@@ -40,22 +45,23 @@ int vecinosVivos(toroide t, int f0, int c0) {
     return cantVecinasVivas;
 }
 
-bool debeVivir(toroide t, int f, int c) {
-    if (t[f][c]) {
-        return (vecinosVivos(t, f, c) == 2 || vecinosVivos(t, f, c) == 3);
-    } else {
-        return vecinosVivos(t, f, c) == 3;
-    }
+int filaToroide(int f, toroide t) {
+    int var = (filas(t) + f) % filas(t);
+    return var;
 }
 
-int filas(vector<vector<bool>> t) { return t.size(); }
-
-int columnas(vector<vector<bool>> t) {
-    if (t.size() > 0) return t[0].size();
-    else return 0;
+int columnaToroide(int c, toroide t) {
+    int var = (columnas(t) + c) % columnas(t);
+    return var;
 }
 
 //ejercicio1
+bool esToroide(vector<vector<bool>> t) {
+    bool result;
+    result = esRectangulo(t) && filas(t) >= 3 && columnas(t) >= 3;
+    return result;
+}
+
 bool esRectangulo(vector<vector<bool>> r) {
     if (columnas(r) > 0 && filas(r) > 0) {
         for (int i = 0; i < r.size(); i++) {
@@ -63,12 +69,6 @@ bool esRectangulo(vector<vector<bool>> r) {
         }
     }
     return true;
-}
-
-bool esToroide(vector<vector<bool>> t) {
-    bool result;
-    result = esRectangulo(t) && filas(t) >= 3 && columnas(t) >= 3;
-    return result;
 }
 
 //ejercicio 3
@@ -91,7 +91,7 @@ int superficieTotal(toroide t) {
 }
 
 //ejercicio 10
-bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2) {
+bool evolucionPrimosLejanos(toroide const &t1, toroide const &t2) {
     //t1 -> t2
     bool primosLejanos = false;
     toroide tAux = t1;
@@ -104,7 +104,22 @@ bool EvolucionPrimosLejanos(toroide const &t1, toroide const &t2) {
         if (t2 == tAux) primosLejanos = true;
         evolucionToroide(tAux);
     }
+
     return primosLejanos || (t2 == tAux && !toroideMuerto(tAux)); //esPeriodico y son iguales
+}
+
+//ejercicio 13
+void valoresTraslados(vector<toroide>& ts, toroide t) {
+    int f, c ;
+    toroide tAux = t;
+    for (f = 0; f < filas(t); f++) {
+        tAux = trasladarHaciaArriba(tAux);
+        ts.push_back(tAux);
+        for (c = 0; c < columnas(t); c++) {
+            tAux = trasladarHaciaDerecha(tAux);
+            ts.push_back(tAux);
+        }
+    }
 }
 
 //ejercicio 14
@@ -152,19 +167,4 @@ toroide trasladarHaciaDerecha(toroide t) {
         }
     }
     return t;
-}
-
-//ejercicio 13
-
-void valoresTraslado(vector<toroide>& ts, toroide t) {
-    int f, c ;
-    toroide tAux = t;
-    for (f = 0; f < filas(t); f++) {
-        tAux = trasladarHaciaArriba(tAux);
-        ts.push_back(tAux);
-        for (c = 0; c < columnas(t); c++) {
-            tAux = trasladarHaciaDerecha(tAux);
-            ts.push_back(tAux);
-        }
-    }
 }
